@@ -1,38 +1,54 @@
+<!DOCTYPE html>
 <html>
 <body>
-<script src="js/three.min.js">
-var camera, scene, renderer;
-var geometry, material, mesh;
+<script src="https://cdn.netpie.io/microgear.js"></script>
+<script>
+  const APPID = "PokSmartHome";
+  const KEY = "xh54ZTJvYI77ez5";
+  const SECRET = "RQb4ej35eAHKvIcBAXfwd9zsT";
 
-init();
-animate();
+  const ALIAS = "HTML_web";         //  ชื่อตัวเอง
+  const thing1 = "NodeMCU1";          //  ชื่อเพื่อนที่จะคุย
 
-function init(){
-	camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 0.01, 10);
-	camera.position.z = 1;
+  var microgear = Microgear.create({
+    key: KEY,
+    secret: SECRET,
+    alias : ALIAS
+  });
 
-	scene = new THREE.Scene();
+  microgear.on('message',function(topic,msg) {
+    document.getElementById("raw_data").innerHTML = "Data from Node MCU = " + msg;
+    document.getElementById("get_topic").innerHTML = "Topic = " + topic;
+    var split_msg = msg.split("/"); //String data = "/" +String(Humidity) + "/" + String(Temp);
+    console.log(msg);  // for debug
+    if(typeof(split_msg[0])!='undefined' && split_msg[0]==""){
+      document.getElementById("Humidity_temp").innerHTML = "Humidity = " + split_msg[1] + " % ,Temp = " + split_msg[2] + " c";
+    }
+  });
 
-	geometry = new THREE.BoxGeometry(0.2, 0.2, 0.2);
-	material = new THREE.MeshNormalMaterial();
+  microgear.on('connected', function() {
+    microgear.setAlias(ALIAS);
+    document.getElementById("connected_NETPIE").innerHTML = "Connected to NETPIE"
+  });
 
-	mesh = new THREE.Mesh(geometry, material);
-	scene.add(mesh);
+  microgear.on('present', function(event) {
+    console.log(event);
+  });
 
-	renderer = new THREE.WebGLRenderer( { antialias: true });
-	renderer.setSize(window.innerWidth, window.innerHeight);
-	document.body.appendChild(renderer.domElement);
-}
+  microgear.on('absent', function(event) {
+    console.log(event);
+  });
 
-function animate(){
-	requestAnimationFrame(animate);
-	mesh.rotation.x += 0.01;
-	mesh.rotation.y += 0.02;
-	renderer.render(scene, camera);
-}
-
+  microgear.resettoken(function(err) {
+    microgear.connect(APPID);
+  });
 </script>
-Test WebGL
+
+<h1 id="connected_NETPIE"></h1>
+<p id="raw_data"></p>
+<p id="get_topic"></p>
+<strong id="Humidity_temp"></strong>
+
 </body>
 </html>
 

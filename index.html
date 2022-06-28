@@ -1,76 +1,32 @@
 <!DOCTYPE html>
 <html>
-<body> <!--
-<script src="https://cdn.netpie.io/microgear.js"></script>
-<script>
-  const APPID = "PokSmartHome";
-  const KEY = "xh54ZTJvYI77ez5";
-  const SECRET = "RQb4ej35eAHKvIcBAXfwd9zsT";
-
-  const ALIAS = "HTML_web";         //  ชื่อตัวเอง
-  const thing1 = "NodeMCU1";          //  ชื่อเพื่อนที่จะคุย
-
-  var microgear = Microgear.create({
-    key: KEY,
-    secret: SECRET,
-    alias : ALIAS
-  });
-
-  microgear.on('message',function(topic,msg) {
-    document.getElementById("raw_data").innerHTML = "Data from Node MCU = " + msg;
-    document.getElementById("get_topic").innerHTML = "Topic = " + topic;
-    var split_msg = msg.split("/"); //String data = "/" +String(Humidity) + "/" + String(Temp);
-    console.log(msg);  // for debug
-    if(typeof(split_msg[0])!='undefined' && split_msg[0]==""){
-      document.getElementById("Humidity_temp").innerHTML = "Humidity = " + split_msg[1] + " % ,Temp = " + split_msg[2] + " c";
-    }
-  });
-
-  microgear.on('connected', function() {
-    microgear.setAlias(ALIAS);
-    document.getElementById("connected_NETPIE").innerHTML = "Connected to NETPIE"
-  });
-
-  microgear.on('present', function(event) {
-    console.log(event);
-  });
-
-  microgear.on('absent', function(event) {
-    console.log(event);
-  });
-
-  microgear.resettoken(function(err) {
-    microgear.connect(APPID);
-  });
-</script>
-
-<h1 id="connected_NETPIE"></h1>
-<p id="raw_data"></p>
-<p id="get_topic"></p>
-<strong id="Humidity_temp"></strong> -->
+<body> 
 
 <pre><span class="inner-pre" style="font-size: 14px">
   <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBxAPEA8PDxAQEBAQDw8QDw8PEBUQFRUQFRUWFhYVFRUYHSggGBonGxUVITIhJSkrLi4uFx8zODMtNygtLisBCgoKDg0OFxAQFy0dHSItLSstLS0tLS0tLSsrLS0tLS0rLS0tKy0tLSsrLS0tLSstLSstLS0tLS0tLS0tLS0tLf/AABEIAOEA4QMBIgACEQEDEQH/xAAcAAACAgMBAQAAAAAAAAAAAAABAgADBQYHBAj/xABBEAABAwIDBQUFBgQFBAMAAAABAAIDBBESITEFBkFRYRMicYGRBzKhscEUI0JSYvBystHhM0NzgqIVdJLxJDRj/8QAGQEBAQEBAQEAAAAAAAAAAAAAAAECAwQF/8QAIxEBAQACAwACAgIDAAAAAAAAAAECEQMhMQQSQVETYRQiMv/aAAwDAQACEQMRAD8A3QBEBGyNlGQARATAIgIAAiAmARAQKAjZMAjZFLZSyayNkC2UsmsogWyllC8c1TDUhxt+9bKC2yhCdCyBLKWT2QsgQhKQrCELKiuyWysIQIUFdkpCtISEIEIS2VhCUhAlkpCsIS2QJZRPZRUemyYBEBEBEABNZEBNZAtkwCICICAWUsmsjZFLZeWsrWQjE82HMZrz7f23DRRGWVwvoxgObncgFxneTeqpq3ElxZHnZjTYW+qiyOnz770rT72IXsS3PLw1Vk291KI3vbI12Ft8IOZJ01XBxMb8T1QfUnz8U7V2ql3hEl8Tmg4xFYHrcm/gvVTVjIiwve3Novd2mv1A9Vw//qMgPvHvEE58V7GbVebXd7osL/O/NEd3pdqNkJcHAtBsP31V0u02DJpxOOltBwvdcX2ZvFLEzACSL3JLjmORsdFuG7m1o53XkPeABwXsMWgAAF8hfLqhp0SI5KyyxkNY7IFrW30AN3eY4eqyERuqhrIWT2QsgrIQIVhCFkFRCUhWkJCEFZCUqyyBCCshKQrClIQJZRPZRB6gEwCgCYBEQBGyICYBFKAmARARsgCxu39rR0UD55M8OTW8XPOjQsnZck9p23WTTthjdibThwcQcjKSAQOdtPVKsaztvaktVKZZnd92gvk1vBoHAeCx0kQ0GJx4n+nJJR00k7iWNc4k2JA06X4Lb9l7ukAYznkbD5LGWcxdsOO5NRZsqR3utJ6aKqbYszA5xb7uoHLmunw0LWX7otcIVezxI0gDUEXsuX83bt/j9OSOjIOatjjOth9VntqbLdGXEtvY2cLcOB8FjnMIHu5fviu8ssebLGy6ebDbh4WV9HUujcHC4INwQbZ+ISufzCDFWW47L3ve0jG4m/PP424LpWxNqNlAF7OIuG8CObTxXCHZAdePVbruRtwAx005IGP7mS/uuP4egN7qDrtkLIQXsLm+WqeyrJLIEJ7KWQVEJSFYQlIQVkJSFYQlIQVkJSFYQlIQIomURHsATAKAJgEUAE1lAEQEEsjZFRBrm/e3RQ0cjwbSyfdw/wAR1d5C59FyLYewXVZe6QljBa51cSTew5LcfaySaimB9xkLnAc3ucR8mqzYlNhhYLZuGI+f9rLnyZajtxYfar9m7Njia1kbQGtFgFkGUytgisF6Y15PX0ZNPL9mSOiA4L24uirkYSs2NxiquhZIMxYi4BGv9wsHNurESSHOb0bkPRbW6JeGuu1pKuOWU8Yzwxvdc32/s5sRAaTrY5/FY0xkDQ3HVZfbziXG+ax7dBY6L3Yedvm8nvTyuI45ZX81dC61ulrJKqNIx1iL8hcLTDvG5W0TU0sb3G7mjATzI4rYFzv2S1RwzwnRpa4ed/6LoqRKWyhCayBCIrIQIVhCUhBUQlIVpCQoKyEpVhCQhAiiayiD2gJgFAEQqIAjZFRQSyNkVjdvbaioYhLLiIc9sbQ23vG9r3NgMjmg5l7U5i/aEEPDDE3yLiSfiV6otvNDrMYSxuQtqVZvdsySpli2oWYImCNrWufe/eNiQG6Enmkiicx1/wD4wJ4uaRnyvdc85+3fiy0zmzdqMk/C5p5FZiOMEXC1N9TK0B74WFgv95A/FYDU4T9Fl9mbYhc3F2sdgLnvDTnZcrjr8PXjybnrIzTMZcWJKxlTtUC4MZB4EG/0XkqtrPd3mRd0+66Z2C45hoBNvGyNFPUSkNaKfPg8vH0Vk/pMs9flXHtmzrPacJ4rIyxtlYeTgvNUwzs9+kDhzp5A/wD4m11XQbThLSAXNsTcOabtI1BGo81jPCzyNYcks920jeGidDJgeLtdk1w+AK11hLH8cJtf+q6jtqmbPGS0tdlcEZ+C5vUsz8Lg/JduLLceXmw+t6UVTu648r+l1WWXwn9IzSvafgAfNXRtysfwg+i6uDoPspp3dq+UXw4S0ngeYPnY+q6pZaZ7LaUspMZ/G45dQbX81uiRKFkpCdBEIgQnISlBWQlIVhSlBUUpVhCQoERRsog9oTKoSjr6JhKOvoqLAiq+0F73TdqOaB1q3tF2c+opYgwYsFVA94/RctPxcFs/aDmlnayRrmOPdc0tPgUGi1ewK1sUwEkZicC5zMbtBmDYttfILGQ0XfMjiDcFtncAeXqts2nVTwQ9g9omDhhbLE4BxYPzsNrG1tCVhHTg6U9Qega0Z/8AkuPJlq9PTw8e+68I+6jccbntay93aANF8vJYbZO74+yNmdiEmFrj/BxbbwWwSQy1D2RGLsoiQ6XEQ5zmjPBYZAE2vrldZ+opsLbWsLcljLPJ3w4cGvyQuqGEgEG509R8CpT05GGz+yc0OBcAbnFzunpKl9OXMMZfGTdpYRiHQtNr+RXtdWRHVkzTyMMnzAIUmVl6W8eOU1lFUUksZFpS4aW8PqtW21E99ZNhxXMbHm3MgXv45rcTNHbuxSvP8BZ8XWVVLs0jHI8DHI7E7oALNaPAJ97PU/hx8nTUxBK25wuAAzIyy8lqtTbtHYHYmmxs64IN8xnquo1bBZzeYK54/Z5fOGt/OL+F8/qtcfJve3Ll4ta0xr4+07rAXHLIBWGEsOFwIdYZEWyXQthbEbEMRbe4BPEB/wD6ssfvXs4F9FhGckrmZcjhNvW/qtTk3dGXx/rh9q6BuVAWUUDT+W48DmPgVnVTSRtZGxg0a0AeQVuIcwuryJZQhTEOYQLxzCAFAqF45hAvHMIAUhCYyDmEhkHMIAQkIRMg5pDIOaINkEO0bzUQe0MTBiYIqgYFMCZEIpcCnZp1EGD3gbYx+DvosdJOGt8tVld52XjYRwfb1H9lq9Y11m3zGLNeXl/6e/49n0JLXPa5rmtuCe86+duGS9P/AFWR9gxt+YdcD5LwunjaRjeATo3j6L2MqY7t97kBgP7Kw6y/oZpXSjD2WFxPvXGHxXppJzE4MfnxaTxCVlREdHtB/V3fmnqgHNINjbMW1B4EJIv2/bLds1w0CokffReSkuWtPML0YVLdrJIxVVDdy1uhpmipdlkA43P76rbp25rGy0DQXuH42kEKY3W0ym7F9GA0jD/mZm3TUnyT0lC2oqqdjxiEIlmP6dAz439Cq6uujpIHSy91jG52GZPBoHEkrKezzFLS/a5AA+pe99hwjBwtb5ALrxY7u2PlckmH1/NbH2QQ7IfsK5Bep81V2Q/YQMQ/YVqiCkxBL2QVxQRFJiCUxBXlKUFBiCUxhXFK4IKezCCtsog9iKATBBEVFEERUUQePbEOOF4GrbOHl/a61kWcxzT4hbmtQ2zRmCS4/wAN5u08ubVx5sfy9Xx89XVatVbODahkzCGuFiC65BOYI+K2+m21YNBZct/Lb+qxb4g4IxUJv72XguMzer6Y32L9p7Q7UBgjHE2IBzOq8ez9ldkL3N3ai+QHAW5rKwUob1+CulAAWcsttTDGeQrCAAByRMi8ZlzSOl5LO1sWSOuV5qv/AA3eFh4p2uVNScsKJtrtVDVbSqY6Z2HsY8MhaNHHMXfne3gurbOpRDEyNoADWgWHNYPdCFl5XWGMFovbhbgVspXt45/rHzuW253YKKKLbmCBRQQAoIoFACkKcpSiEKUpykKBVEVEHrCIQTIIooigiiiKCKmrpmysLHi4PqDzHVXKIrSKyB0EnZv8Wu4ObwKvhqQOV1sO2NnNqIy02Dhmx3I8j0XPaindG9zHOewtJDm34rz54au3r4uXc1Wyy7Ra0Z2XidUOlNxk3msXE1gzJLj1N16m1I8lxyj0TJ6RHZVkpDU3yCviYBmdVhsWCykNO+VwaxuJx90fNxPAdV7aPZ8kzgA2zdXOOTQOZPE9AsNvlvYyiDqOgIMxFp6nUtP5R16aDxXfi4bn744cvNMPPSb4bwR0EX2Clkc6pL2yTTsdhwOBBtlxyAw8tVu+wK/7TS085teSJpdb8+jviCvnsuJJJJJJJJOZJ5krq3so2uHwvpHHvxuMkY5xuPet4O/mXtyx1Onz97vbfVFFFhQQRQQBQolBEKUCmKUoEKUpykKBVEVEHqCZAIoIooigiiiiAqIKICtS3vpmueHtGbQBIR193z1+C2xa3tZ33dQ38Rkdi45CxCfXcrWN1Y1T7IeaZsHVeiFrnWAGK+lsz6LZNmbpOeA6d5YNezZ73mdAvJMcsr091yxxm6wmzqN8jgyJuJx+HXoPFbpszd9kXeltI/r7o8uKyNFRxwNwRMDBxtqTzJ1JWp+0TfBtDH2MRBqZAcI/I3TG76DivTx8Envdebk+Rcup1GK9pO+nYXo6V1pSLSPb/ljkP1fJciLr/wB00spcS5xLnOJLnE3JJzJJVd16XlQle/Y+1HUs0czCcTHAgDK44tPQi481jJH2F/3dIwnU6lKr6D3c3lp69l4jhkHvwvIxDqPzDr8lmV83UdU+NzXxucx7TdrmktIPQhdK3X9ot8MVd0AqGj+do+Y9FyuLW3R0EsUjXtDmkOa4Atc03BB4gpllQUUURASlFAoFKUpilKBVFFEHrCgURCCBFBFBFFFEEQUWJ2rttsT208IE1XJlHADp+uQ/hYBnz5IMu0XWI3io5AcULO0fIAwtvYB1snE8Bb5LWt/96TRQ/Y4pcdU9o7aZvdLMQ/Db3TyHAWXt9jQD6Kd7iXSGqd2j3EucbMZhuTnxPqtzo22TYGw207QXWdLYYn8BzDeQWbKllRXVkdPG6WZwYxouSfkOZSSTqFtt3WJ3x3iZs6mdMbOkd3IYyfekP0GpXz7X1sk8j5ZXF8kji5zjxJ+nRZjfbeN20al0uYib3IIz+FnM9Scz5DgteXSdMoUpKDnKid2jOJzd4Ih2944uA0/qmcURkEEUwKsY9VIgoNw3Q3ukonBjrvp3HvRk6X1czkemh+K6/QVsdRG2WFwex2hHPiCOB6L51Y5bFupvLLQyAi7onEdrETkRzHJw5rGWKyu4IKigrY6iNk0Tg5jxdpHxB5Ecl6FzUpQKJQQKUpTFKUCqKKIPUmCVEICooogiiiiDVt/d5DRQtZER9onuI+OBg96S3wHU9Fzih3rqaVrmQCJskhcZKl0faTOvnm9xPyVO821ftlZUVF7xtd2UQ/8AzZkLeJufNYNz9TxJyXWTUZtGeV0j3PkcXOJLnvcbkuOpJXSvYltP72rpTo5kczB1aS1/wcz0XMCMtbLc/ZJQSPq5J2SGMQRZlrQcRkyDTf8AhJ8goO21FWI9RdxPcY3U+PILk3tS3iLnfZGuu+wM5ByY05iJvU5Fx1OQ6LcN5dqt2bTSzuOOZ5wRYzcukIy/2jMnoFwuomdI5z3uLnvcXOcdS45klbkLVbkrimuvK1znE6NAJGWZyyRDveBm4+SqgBJLjqc/LgFZ2QGdrnmcymjCBrXTAIgIoFIQRKZrUAa0q1pPigiEGzbmb1PoZcL7up3n7xozsfztHMfEeS7JS1LJWNkicHseAWuabghfOwWe3S3jkoJgbl0DyBNFe4t+Zo4OHx0WMsWpXbylKWKVr2tewhzXNDmuGhaRcEIlc1ApSmKQoAooog9YRCrx9Ee0QOokxqY0Fiw+9+0Ps1DVSg2cInNYf1v7jfi5ZXGtF9rtZho4oR/nTi/8LASfiWqz0rlQyYxvEjEfPRI/XoMh9UcWrvIfvwSrrazBk0XWvZHTNjopZTYOlmJJOXcYAB8cRXJ3i+mvAdVvO2trCi2bDQxG0s7SZSNREO6fNxB8rqQrDb97xfb6klh+4hvHAOBH4n/7iPQBa0oSotIgVEQsXD9V/XNWvcALledriSXaC1gOnMoLTmrGhLG1OgKBKhSk8EDMzzThKEwQFEIIoIi1BEIOoezDbWON9G896IY4b8Yye83yOf8Au6LeVwnYO0TS1EU4/A8Fw5sOTh6ErubZAQCCCCAQRxB0K5ZTVbhikJRJSkrIiiW6iD2I2QUCoNlLBRRQSy5b7YagGaliBzbFI8j+NwA/kXUlwLejan2usqKi92Yy2P8A0291vra/mtYTtKxTuXL5oBKw5X5m6IWr6j37MA7UOd7kQMr/AAboPG5C81fVumkdK/Vx04ADIAdAMlWJe64D8RFzzDdB6k+gVa1Cig51kSV5ZHYzYe6NevRVAvjNz7o0HPqrWNuoGqwZIGCiVRASUrP7IPKZmiBwmSohAUyVMgiIKVFBa1dd3Bre3omAm7oXOhPgM2/8SPRchat99lVVaSphv7zGSAdWktP8wWMvGo6EY/3ZIY/BXFIVzVV2fgorFEHsRQUVBCKiigorv8KX/Sk/lK+cW+56fJRRdMEyCPRvgPkmRUQKgootskfofBUU/uj98VFEHoaioogCIUUQJIrAoogZMFFEBRQUQRQqKIHC3D2Zf/dP/byfNqiizl41HUylKii5KCiiiD//2Q==" alt="hi" class="inline"/>
   
   ผศ.ดร. เอกรัฐ รัฐกาญจน์ (Assistant Professor Ekarat Rattagan, Ph.D.)
-  ผู้อำนวยการหลักสูตรการวิเคราะห์ข้อมูลและวิทยาการข้อมูล (Data Analytics and Data Science)
-  คณะสถิติประยุกต์
-  สถาบันบัณฑิตพัฒนบริหารศาสตร์
+  ผู้อำนวยการหลักสูตรการวิเคราะห์ข้อมูลและวิทยาการข้อมูล (Head of Master of Science Program in Data Analytics and Data Science (DADS))
+  คณะสถิติประยุกต์ (GRADUATE SCHOOL OF APPLIED STATISTICS)
+  สถาบันบัณฑิตพัฒนบริหารศาสตร์ (National Institute of Development Administration, Bangkok, Thailand)
   
   <b>Ekarat Rattagan</b> received the Bachelor of Architecture (B.Arch) from Chulalongkorn University, in 1999, 
   the MS degree in Information Technology from King Mongkuts University of Technology Thonburi (KMUTT), Bangkok, Thailand, in 2003, 
   and the Ph.D. degree in Electrical Engineering and Computer Science from National Chiao Tung University, Hsinchu, Taiwan, in 2016.
-  His research interests include mobile embedded systems, IoT, AI, and Game
+  His research interests include mobile embedded systems, IoT, AI/ML, and Video Game
   
   <b>Publication </b>
   <pre>
   Patents
+  
   [P1] 	Ekarat Rattagan, Ying-Dar Lin, Yuan-Cheng Lai, Kate Ching-Ju Lin, 
   “Symbolic Regression and Clustering for Power Consumption Estimation on Smartphone Hardware Subsystem,” 
   以符號迴歸分群法量測手機應用之耗電", Taiwan Patent  I512451.
 
   Journal
   
+  [J5]  Chian Techapanupreeda, Ekarat Rattagan, Werasak Kurutach: A transaction security accountability protocol for electronic health systems. 
+        Int. Arab J. Inf. Technol. 19(3): 289-297 (2022)
   [J4]  Hesham El-Sayed, Sharmi Sankar, Yousef-Awwad Daraghmi, Prayag Tiwari, Ekarat Rattagan, Manoranjan Mohanty, 
         Deepak Puthal, Mukesh Prasad:
         "Accurate Traffic Flow Prediction in Heterogeneous Vehicular Networks in an Intelligent Transport System 
@@ -103,7 +59,7 @@
   <b>Contact</b><br>
   <a target="_blank" href="https://www.facebook.com/pok.pok.330467">Facebook</a>
   <a target="_blank" href="https://www.linkedin.com/in/ekarat-rattagan-478210100">LinkedIn</a>
-  Email: pokekarat@gmail.com
+  Email: ekarat@as.nida.ac.th
   Line: ajpok
   Twitter: @ekaratrattagan
   Facebook: https://www.facebook.com/pok.pok.330467/
